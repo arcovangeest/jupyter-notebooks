@@ -1,9 +1,12 @@
-FROM quay.io/jupyteronopenshift/s2i-minimal-notebook-py36:2.5.1
+#FROM quay.io/jupyteronopenshift/s2i-minimal-notebook-py36:2.5.1
+FROM jhub-ageest/s2i-minimal-notebook
 
 USER root
 
 COPY . /tmp/src
 
+RUN yum -y install nodejs
+RUN rpm -qa nodejs
 RUN rm -rf /tmp/src/.git* && \
     chown -R 1001 /tmp/src && \
     chgrp -R 0 /tmp/src && \
